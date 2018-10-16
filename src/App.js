@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Canvas from './Canvas'
 import './App.css'
+import { talky } from './talky'
 
 import AWS from 'aws-sdk'
 
@@ -42,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <button onClick={speechDemo}>CLICK ME</button>
+        <button onClick={() => talky('something something dark side')}>CLICK ME</button>
         <Canvas />
       </div>
     );
