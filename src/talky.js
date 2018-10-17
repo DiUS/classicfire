@@ -5,9 +5,9 @@ export const talky = words => {
   AWS.config.accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID
   AWS.config.secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY
 
-  var polly = new AWS.Polly({apiVersion: '2016-06-10'})
+  const polly = new AWS.Polly({apiVersion: '2016-06-10'})
 
-  var params = {
+  const params = {
       OutputFormat: 'mp3',
       Text: words,
       VoiceId: 'Joanna',
@@ -19,10 +19,10 @@ export const talky = words => {
       if (err) {
         console.log(err, err.stack)
       } else {
-        var uInt8Array = new Uint8Array(data.AudioStream)
-        var arrayBuffer = uInt8Array.buffer
-        var blob = new Blob([arrayBuffer])
-        var url = URL.createObjectURL(blob)
+        const uInt8Array = new Uint8Array(data.AudioStream)
+        const arrayBuffer = uInt8Array.buffer
+        const blob = new Blob([arrayBuffer])
+        const url = URL.createObjectURL(blob)
 
         const audioElement = document.createElement('audio')
         audioElement.src = url
