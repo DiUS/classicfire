@@ -10,7 +10,7 @@ class Canvas extends Component {
   };
 
   populateSuggestions = suggestions => {
-    this.setState({ suggestions });
+    this.setState({ suggestions }, () => this.props.onSuggestions(suggestions));
   };
 
   componentDidMount() {
