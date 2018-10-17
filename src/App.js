@@ -4,6 +4,7 @@ import Suggestions from "./Suggestions";
 import Favourites from "./Favourites";
 import LanguagePicker from './LanguagePicker';
 import "./App.css";
+import { talky } from './talky'
 
 class App extends Component {
   state = {
@@ -12,6 +13,8 @@ class App extends Component {
     foundMatch: false,
     language: 'en-EN'
   };
+
+  talk = (words) => talky(this.state.language, words)
 
   onLanguageSelect = (language) => {
     console.log('language', language)
@@ -44,8 +47,9 @@ class App extends Component {
         <Suggestions
           suggestions={this.state.keywords}
           onSelect={this.onSelect}
+          talky={this.talk}
         />
-        <Favourites items={this.state.favourites} />
+        <Favourites items={this.state.favourites} talky={this.talk} />
         <LanguagePicker language={this.state.language} onSelectLanguage={this.onLanguageSelect} />
       </div>
     );

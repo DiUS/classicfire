@@ -7,9 +7,9 @@ AWS.config.secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY
 const polly = new AWS.Polly({apiVersion: '2016-06-10'})
 const translate = new AWS.Translate({apiVersion: '2017-07-01'})
 
-const getVoices = () => new Promise((resolve, reject) => {
+const getVoices = (language) => new Promise((resolve, reject) => {
   const params = {
-    LanguageCode: 'es-ES'
+    LanguageCode: language 
   }
   return polly.describeVoices(params, (err, data) => {
     const voiceIds = data.Voices.map(v => v.Id)
@@ -17,10 +17,10 @@ const getVoices = () => new Promise((resolve, reject) => {
   })
 })
 
-const doTranslate = (words) => new Promise((resolve, reject) => {
+const doTranslate = (languageCode, words) => new Promise((resolve, reject) => {
   const params = {
     SourceLanguageCode: 'en',
-    TargetLanguageCode: 'es',
+    TargetLanguageCode: languageCode,
     Text: words
   }
   return translate.translateText(params, (err, data) => {
@@ -31,11 +31,12 @@ const doTranslate = (words) => new Promise((resolve, reject) => {
   })
 })
 
-export const talky = async (words) => {
+export const talky = async (language, words) => {
 
-  const translatedWords = await doTranslate(words)
+  const targetLanguageCode = language.slice(0,3)
+  const translatedWords = await doTranslate(targetLanguageCode, words)
 
-  const voiceIds = await getVoices()
+  const voiceIds = await getVoices(language)
 
   const params = {
     OutputFormat: 'mp3',
