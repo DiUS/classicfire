@@ -1,11 +1,16 @@
 import React from 'react'
 import { talky } from './talky';
 
-const Suggestions = ({ suggestions }) => (
+const onClick = (item, onSelect) => {
+  onSelect(item)
+  talky(item)
+}
+
+const Suggestions = ({ suggestions, onSelect }) => (
   <div className='Suggestions'>
     {!suggestions && <div className='NoSuggestions'>do something</div> }
-    {suggestions.slice(0, 3).map(item => (
-        <div key={item} className='Suggestion' onClick={() => talky(item)}>{item}</div>
+    {suggestions.map(item => (
+      <div key={item} className='Suggestion' onClick={() => onClick(item, onSelect)}>{item}</div>
       )
     )}
   </div>
