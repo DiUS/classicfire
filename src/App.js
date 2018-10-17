@@ -11,7 +11,7 @@ class App extends Component {
     keywords: [],
     favourites: [],
     foundMatch: false,
-    language: 'en-AU'
+    language: 'en-GB'
   };
 
   talk = (words) => talky(this.state.language, words)
