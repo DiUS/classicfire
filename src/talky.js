@@ -7,6 +7,8 @@ AWS.config.secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY
 const polly = new AWS.Polly({apiVersion: '2016-06-10'})
 const translate = new AWS.Translate({apiVersion: '2017-07-01'})
 
+let voices = {};
+
 const getVoices = (language) => new Promise((resolve, reject) => {
   const params = {
     LanguageCode: language 
@@ -36,12 +38,15 @@ export const talky = async (language, words) => {
   const targetLanguageCode = language.slice(0,3)
   const translatedWords = await doTranslate(targetLanguageCode, words)
 
-  const voiceIds = await getVoices(language)
+  if (!voices[language]) {
+    const voiceIds = await getVoices(language)
+    voices[language] = voiceIds
+  }
 
   const params = {
     OutputFormat: 'mp3',
     Text: translatedWords,
-    VoiceId: voiceIds[0],
+    VoiceId: voices[language][0],
     SampleRate: '22050',
     TextType: 'text'
   }
