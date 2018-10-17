@@ -20,6 +20,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className='Title'>Classic Fire</div>
         <div className="CanvasContainer"><Canvas onSuggestions={this.onSuggestions} /></div>
         <Suggestions suggestions={this.state.keywords} onSelect={this.onSelect} />
         <Favourites items={this.state.favourites} />

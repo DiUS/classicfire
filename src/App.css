@@ -1,3 +1,8 @@
+@font-face {
+  font-family: FireFont;
+  src: url('./fonts/pepperoni_pizza.ttf');
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -24,5 +29,13 @@
 .CanvasContainer {
   display: flex;
   flex-grow: 1;
+  position: relative;
 }
 
+.Title {
+  text-align: center;
+  padding: 10px;
+  font-family: FireFont;
+  font-size: 60px;
+  color: #cc6633;
+}
