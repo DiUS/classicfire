@@ -2,14 +2,21 @@ import React, { Component } from "react";
 import Canvas from "./Canvas";
 import Suggestions from "./Suggestions";
 import Favourites from "./Favourites";
+import LanguagePicker from './LanguagePicker';
 import "./App.css";
 
 class App extends Component {
   state = {
     keywords: [],
     favourites: [],
-    foundMatch: false
+    foundMatch: false,
+    language: 'en-EN'
   };
+
+  onLanguageSelect = (language) => {
+    console.log('language', language)
+    this.setState({ language })
+  }
 
   onSuggestions = suggestions => {
     const keywords = suggestions.slice(0, 3).map(s => s.keyword);
@@ -24,7 +31,7 @@ class App extends Component {
 
     setTimeout(() => {
       this.setState({foundMatch: false})
-    }, 1500)
+    }, 2000)
   }
 
   render() {
@@ -39,6 +46,7 @@ class App extends Component {
           onSelect={this.onSelect}
         />
         <Favourites items={this.state.favourites} />
+        <LanguagePicker language={this.state.language} onSelectLanguage={this.onLanguageSelect} />
       </div>
     );
   }

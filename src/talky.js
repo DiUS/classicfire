@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk'
 
-AWS.config.region = 'us-east-1'
+AWS.config.region = 'us-west-2'
 AWS.config.accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID
 AWS.config.secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY
 
