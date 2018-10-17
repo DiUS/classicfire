@@ -21,7 +21,8 @@
 }
 
 .Suggestion {
-  background-color: aquamarine;
+  background-color: #f95300;
+  color: white;
   padding: 50px;
   font-size: 2rem;
 }
