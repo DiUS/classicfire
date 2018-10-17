@@ -35,6 +35,9 @@ const doTranslate = (languageCode, words) => new Promise((resolve, reject) => {
 
 export const talky = async (language, words) => {
 
+  if (language === 'en-AU') {
+    words = `it's a ${words} mate?`
+  }
   const targetLanguageCode = language.slice(0,3)
   const translatedWords = await doTranslate(targetLanguageCode, words)
 
