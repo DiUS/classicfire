@@ -4,9 +4,9 @@
   "private": true,
   "dependencies": {
     "aws-sdk": "^2.336.0",
+    "dotenv": "^6.1.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-drawable-canvas": "^1.1.1",
     "react-scripts": "2.0.5"
   },
   "scripts": {

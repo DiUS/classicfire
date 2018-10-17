@@ -1,0 +1,34 @@
+.wrapper {
+  display: flex;
+  flex-grow: 1;
+  user-select: none;
+  overflow: hidden;
+}
+
+.canvas {
+  width: 100%;
+  background-color: white;
+  user-select: none;
+  transition: 0.4s;
+}
+
+.canvasZoom {
+  width: 100%;
+  background-color: white;
+  user-select: none;
+  transition: 0.4s;
+  transform: scale(1.5) rotate(10deg);
+}
+
+.restart {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+.restart:hover,
+.restart:active {
+  color: crimson;
+}
