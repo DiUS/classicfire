@@ -7,6 +7,7 @@
 }
 
 .Suggestions {
+  height: 150px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -19,6 +20,7 @@
 }
 
 .CanvasContainer {
+  display: flex;
   flex-grow: 1;
 }
 
