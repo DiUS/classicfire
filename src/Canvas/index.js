@@ -2,16 +2,17 @@ import React, { Component } from "react";
 
 import canvasHelper from "./canvasHelper";
 import cursor from "./pencil.png";
-import styles from "./Canvas.css";
+import styles from "./Canvas.module.css";
 
 class Canvas extends Component {
   state = {
     suggestions: []
-  };
+  }
 
   populateSuggestions = suggestions => {
+    console.log( { suggestions } )
     this.setState({ suggestions }, () => this.props.onSuggestions(suggestions));
-  };
+  }
 
   componentDidMount() {
     this.canvasHelper = new canvasHelper(this.canvas, this.populateSuggestions);
@@ -42,11 +43,6 @@ class Canvas extends Component {
         <span className={styles.restart} onClick={this.reset.bind(this)}>
           ✖ restart drawing
         </span>
-        <div>
-          {this.state.suggestions.map(s => (
-            <div>{s.keyword}</div>
-          ))}
-        </div>
       </div>
     );
   }
