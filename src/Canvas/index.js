@@ -18,15 +18,15 @@ class Canvas extends Component {
     this.canvasHelper = new canvasHelper(this.canvas, this.populateSuggestions);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.props.foundMatch && nextProps.foundMatch) {
-      this.canvasHelper.handleMouseUp();
-    }
+  // componentWillReceiveProps(nextProps) {
+  //   if (!this.props.foundMatch && nextProps.foundMatch) {
+  //     this.canvasHelper.handleMouseUp();
+  //   }
 
-    if (this.props.foundMatch && !nextProps.foundMatch) {
-      this.canvasHelper.resetCanvas();
-    }
-  }
+  //   if (this.props.foundMatch && !nextProps.foundMatch) {
+  //     this.canvasHelper.resetCanvas();
+  //   }
+  // }
 
   reset() {
     this.canvasHelper.resetCanvas();

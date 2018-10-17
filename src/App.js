@@ -7,7 +7,8 @@ import "./App.css";
 class App extends Component {
   state = {
     keywords: [],
-    favourites: []
+    favourites: [],
+    foundMatch: false
   };
 
   onSuggestions = suggestions => {
@@ -15,17 +16,23 @@ class App extends Component {
     this.setState({ keywords });
   };
 
-  onSelect = item =>
+  onSelect = item => {
     this.setState(state => ({
-      favourites: Array.from(new Set([item, ...state.favourites])).slice(0, 3)
+      favourites: Array.from(new Set([item, ...state.favourites])).slice(0, 3),
+      foundMatch: true
     }));
+
+    setTimeout(() => {
+      this.setState({foundMatch: false})
+    }, 1500)
+  }
 
   render() {
     return (
       <div className="App">
         <div className="Title">Classic Fire</div>
         <div className="CanvasContainer">
-          <Canvas onSuggestions={this.onSuggestions} />
+          <Canvas onSuggestions={this.onSuggestions} foundMatch={this.state.foundMatch} />
         </div>
         <Suggestions
           suggestions={this.state.keywords}
