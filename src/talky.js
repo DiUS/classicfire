@@ -1,18 +1,31 @@
 import AWS from 'aws-sdk'
 
-export const talky = words => {
-  AWS.config.region = 'ap-southeast-2'
-  AWS.config.accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID
-  AWS.config.secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY
+AWS.config.region = 'ap-southeast-2'
+AWS.config.accessKeyId = process.env.REACT_APP_ACCESS_KEY_ID
+AWS.config.secretAccessKey = process.env.REACT_APP_SECRET_ACCESS_KEY
 
-  const polly = new AWS.Polly({apiVersion: '2016-06-10'})
+const polly = new AWS.Polly({apiVersion: '2016-06-10'})
+
+const getVoices = () => new Promise((resolve, reject) => {
+  const params = {
+    LanguageCode: 'es-ES'
+  }
+  return polly.describeVoices(params, (err, data) => {
+    const voiceIds = data.Voices.map(v => v.Id)
+    resolve(voiceIds)
+  })
+})
+
+export const talky = async (words) => {
+
+  const voiceIds = await getVoices()
 
   const params = {
-      OutputFormat: 'mp3',
-      Text: words,
-      VoiceId: 'Joanna',
-      SampleRate: '22050',
-      TextType: 'text'
+    OutputFormat: 'mp3',
+    Text: words,
+    VoiceId: voiceIds[0],
+    SampleRate: '22050',
+    TextType: 'text'
   }
 
   polly.synthesizeSpeech(params, function(err, data) {
