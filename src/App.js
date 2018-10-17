@@ -9,7 +9,7 @@ class App extends Component {
   }
 
   onSuggestions = (suggestions) => {
-    const keywords = suggestions.map(s => s.keyword)
+    const keywords = suggestions.slice(0, 3).map(s => s.keyword)
     this.setState({ keywords })
   }
 
