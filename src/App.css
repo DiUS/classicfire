@@ -7,6 +7,8 @@
 }
 
 .Suggestions {
+  background-color:#f9f9f9;
+  padding: 20px 0;
   height: 150px;
   display: flex;
   justify-content: space-around;
@@ -16,7 +18,7 @@
 .Suggestion {
   background-color: aquamarine;
   padding: 50px;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .CanvasContainer {

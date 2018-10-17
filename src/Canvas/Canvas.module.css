@@ -1,8 +1,8 @@
 .wrapper {
   user-select: none;
   overflow: hidden;
-  border: 2px solid red;
   flex-grow: 1;
+  border: 3px dashed grey;
 }
 
 .canvas {
@@ -11,7 +11,6 @@
   background-color: white;
   user-select: none;
   transition: 0.4s;
-  border: 2px solid grey;
 }
 
 .canvasZoom {

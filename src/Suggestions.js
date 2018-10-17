@@ -8,7 +8,7 @@ const onClick = (item, onSelect) => {
 
 const Suggestions = ({ suggestions, onSelect }) => (
   <div className='Suggestions'>
-    {!suggestions && <div className='NoSuggestions'>do something</div> }
+    {suggestions.length < 1 && <div className='NoSuggestions'>Please draw something in the canvas above</div> }
     {suggestions.map(item => (
       <div key={item} className='Suggestion' onClick={() => onClick(item, onSelect)}>{item}</div>
       )
