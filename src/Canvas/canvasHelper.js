@@ -2,19 +2,28 @@ class canvasHelper {
   constructor(_canvas, guessCallback) {
     this._canvas = _canvas;
     this.guessCallback = guessCallback;
-    this.context = this._canvas.getContext('2d');
+    this.context = this._canvas.getContext("2d");
 
-    this._canvas.setAttribute('width', this._canvas.clientWidth);
-    this._canvas.setAttribute('height', this._canvas.clientHeight);
-    this._canvas.addEventListener('mousedown', this.handleMouseDown.bind(this));
-    this._canvas.addEventListener('mousemove', this.handleMouseMove.bind(this));
-    this._canvas.addEventListener('mouseup', this.handleMouseUp.bind(this));
-    this._canvas.addEventListener('pointerdown', this.handleMouseDown.bind(this));
-    this._canvas.addEventListener('pointermove', this.handleMouseMove.bind(this));
-    this._canvas.addEventListener('pointerup', this.handleMouseUp.bind(this));
-    this._canvas.addEventListener('touchstart', this.handleTouchDown.bind(this));
-    this._canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
-    this._canvas.addEventListener('touchend', this.handleTouchEnd.bind(this));
+    this._canvas.setAttribute("width", this._canvas.clientWidth);
+    this._canvas.setAttribute("height", this._canvas.clientHeight);
+    this._canvas.addEventListener("mousedown", this.handleMouseDown.bind(this));
+    this._canvas.addEventListener("mousemove", this.handleMouseMove.bind(this));
+    this._canvas.addEventListener("mouseup", this.handleMouseUp.bind(this));
+    this._canvas.addEventListener(
+      "pointerdown",
+      this.handleMouseDown.bind(this)
+    );
+    this._canvas.addEventListener(
+      "pointermove",
+      this.handleMouseMove.bind(this)
+    );
+    this._canvas.addEventListener("pointerup", this.handleMouseUp.bind(this));
+    this._canvas.addEventListener(
+      "touchstart",
+      this.handleTouchDown.bind(this)
+    );
+    this._canvas.addEventListener("touchmove", this.handleTouchMove.bind(this));
+    this._canvas.addEventListener("touchend", this.handleTouchEnd.bind(this));
 
     this.lastCoords = null;
 
@@ -71,7 +80,7 @@ class canvasHelper {
       var coords = this.getMousePos(e);
       this.context.beginPath();
       this.context.lineWidth = 10;
-      this.context.lineCap = 'round';
+      this.context.lineCap = "round";
 
       this.context.moveTo(this.lastCoords.x, this.lastCoords.y);
       this.context.lineTo(coords.x, coords.y);
@@ -127,29 +136,32 @@ class canvasHelper {
   }
 
   checkTheSketch() {
-    const url = 'https://inputtools.google.com/request?ime=handwriting&app=quickdraw&dbg=1&cs=1&oe=UTF-8'
+    const url =
+      "https://inputtools.google.com/request?ime=handwriting&app=quickdraw&dbg=1&cs=1&oe=UTF-8";
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', url);
-    xhr.setRequestHeader('Accept', '*/*');
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.open("POST", url);
+    xhr.setRequestHeader("Accept", "*/*");
+    xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onload = () => {
       if (xhr.status === 200) {
         this.formatAndSendData(xhr.responseText);
+      } else {
+        console.log("Request failed.  Returned status of " + xhr.status);
       }
-      else {
-        console.log('Request failed.  Returned status of ' + xhr.status);
-      }
-    }
+    };
 
     const data = {
-      "input_type": 0,
-      "requests": [
+      input_type: 0,
+      requests: [
         {
-          "language": "quickdraw",
-          "writing_guide": { "width": this._canvas.width, "height": this._canvas.height },
-          "ink": [[this.xCoords, this.yCoords, this.times]]
+          language: "quickdraw",
+          writing_guide: {
+            width: this._canvas.width,
+            height: this._canvas.height
+          },
+          ink: [[this.xCoords, this.yCoords, this.times]]
         }
       ]
     };
@@ -160,11 +172,11 @@ class canvasHelper {
 
   formatAndSendData(res) {
     const result = JSON.parse(res);
-    const matches = JSON.parse(result[1][0][3].debug_info.match(/SCORESINKS: (.+) Combiner:/)[1]);
+    const matches = result[1][0][1];
 
-    const keywords = matches.map(m => ({ keyword: m[0], score: m[1] }));
+    const keywords = matches.map(m => ({ keyword: m }));
     this.guessCallback(keywords);
   }
-};
+}
 
 export default canvasHelper;
