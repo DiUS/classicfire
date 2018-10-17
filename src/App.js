@@ -17,7 +17,7 @@ class App extends Component {
 
   onSelect = item =>
     this.setState(state => ({
-      favourites: [item, ...state.favourites].slice(0, 3)
+      favourites: Array.from(new Set([item, ...state.favourites])).slice(0, 3)
     }));
 
   render() {
