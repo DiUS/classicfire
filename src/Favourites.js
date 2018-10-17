@@ -1,14 +1,16 @@
-import React from 'react'
-import { talky } from './talky';
+import React from "react";
+import { talky } from "./talky";
+import styles from "./Favourites.module.css";
 
 const Favourites = ({ items }) => (
-  <div className='Favourites'>
-    {items.map(item => (
-        <div key={item} className='Suggestion' onClick={() => talky(item)}>{item}</div>
-      )
-    )}
+  <div className={styles.wrapper}>
+    <h3>Recent</h3>
+    {items.map((item, i) => (
+      <button key={i} className={styles.item} onClick={() => talky(item)}>
+        {item}
+      </button>
+    ))}
   </div>
-)
+);
 
-export default Favourites
-
+export default Favourites;
