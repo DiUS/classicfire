@@ -36,8 +36,12 @@ class canvasHelper {
   }
 
   handleTouchDown(e) {
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousedown", {
+    const touch = e.touches[0];
+    if (touch === undefined) {
+      return
+    }
+
+    const mouseEvent = new MouseEvent("mousedown", {
       clientX: touch.clientX,
       clientY: touch.clientY,
       timeStamp: touch.timeStamp
@@ -47,8 +51,12 @@ class canvasHelper {
   }
 
   handleTouchMove(e) {
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousemove", {
+    const touch = e.touches[0];
+    if (touch === undefined) {
+      return
+    }
+
+    const mouseEvent = new MouseEvent("mousemove", {
       clientX: touch.clientX,
       clientY: touch.clientY,
       timeStamp: touch.timeStamp
@@ -58,8 +66,12 @@ class canvasHelper {
   }
 
   handleTouchEnd(e) {
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mouseup", {
+    let touch = e.touches[0];
+    if (touch === undefined) {
+      return
+    }
+
+    let mouseEvent = new MouseEvent("mouseup", {
       clientX: touch.clientX,
       clientY: touch.clientY,
       timeStamp: touch.timeStamp
@@ -71,13 +83,13 @@ class canvasHelper {
   handleMouseDown(e) {
     this.isDrawing = true;
 
-    var coords = this.getMousePos(e);
+    let coords = this.getMousePos(e);
     this.lastCoords = coords;
   }
 
   handleMouseMove(e) {
     if (this.isDrawing) {
-      var coords = this.getMousePos(e);
+      let coords = this.getMousePos(e);
       this.context.beginPath();
       this.context.lineWidth = 10;
       this.context.lineCap = "round";
@@ -104,7 +116,7 @@ class canvasHelper {
   }
 
   getMousePos(e) {
-    var rect = this._canvas.getBoundingClientRect();
+    let rect = this._canvas.getBoundingClientRect();
     return {
       x: e.clientX - rect.left,
       y: e.clientY - rect.top
@@ -122,12 +134,12 @@ class canvasHelper {
   }
 
   getTime(e) {
-    var time;
+    let time;
     if (!this.isTimerOn) {
       this.isTimerOn = true;
       time = 0;
     } else {
-      var timeDelta = e.timeStamp - this.lastTimeStamp;
+      let timeDelta = e.timeStamp - this.lastTimeStamp;
       time = this.times[this.times.length - 1] + timeDelta;
     }
 
