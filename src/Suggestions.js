@@ -8,8 +8,8 @@ const onClick = (talky, item, onSelect) => {
 const Suggestions = ({ suggestions, onSelect, talky }) => (
   <div className='Suggestions'>
     {suggestions.length < 1 && <div className='NoSuggestions'>Please draw something in the canvas above</div> }
-    {suggestions.map(item => (
-      <div key={item} className='Suggestion' onClick={() => onClick(talky, item, onSelect)}>{item}</div>
+    {suggestions.map((item, i) => (
+      <div key={i} className='Suggestion' onClick={() => onClick(talky, item, onSelect)}>{item}</div>
       )
     )}
   </div>
